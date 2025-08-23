@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(222 84% 4.9%);
+  --foreground: hsl(210 40% 98%);
+  --card: hsl(222 84% 4.9%);
+  --card-foreground: hsl(210 40% 98%);
+  --popover: hsl(222 84% 4.9%);
+  --popover-foreground: hsl(210 40% 98%);
+  --primary: hsl(221 83% 53%);
+  --primary-foreground: hsl(210 40% 98%);
+  --secondary: hsl(217 32% 17%);
+  --secondary-foreground: hsl(210 40% 98%);
+  --muted: hsl(217 32% 17%);
+  --muted-foreground: hsl(215 20% 65%);
+  --accent: hsl(217 32% 17%);
+  --accent-foreground: hsl(210 40% 98%);
+  --destructive: hsl(0 62% 30%);
+  --destructive-foreground: hsl(210 40% 98%);
+  --border: hsl(217 32% 17%);
+  --input: hsl(217 32% 17%);
+  --ring: hsl(221 83% 53%);
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: hsl(222 84% 4.9%);
+  --foreground: hsl(210 40% 98%);
+  --card: hsl(222 84% 4.9%);
+  --card-foreground: hsl(210 40% 98%);
+  --popover: hsl(222 84% 4.9%);
+  --popover-foreground: hsl(210 40% 98%);
+  --primary: hsl(221 83% 53%);
+  --primary-foreground: hsl(210 40% 98%);
+  --secondary: hsl(217 32% 17%);
+  --secondary-foreground: hsl(210 40% 98%);
+  --muted: hsl(217 32% 17%);
+  --muted-foreground: hsl(215 20% 65%);
+  --accent: hsl(217 32% 17%);
+  --accent-foreground: hsl(210 40% 98%);
+  --destructive: hsl(0 62% 30%);
+  --destructive-foreground: hsl(210 40% 98%);
+  --border: hsl(217 32% 17%);
+  --input: hsl(217 32% 17%);
+  --ring: hsl(221 83% 53%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-inter;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .navbar-blur {
+    backdrop-filter: blur(12px);
+    background: rgba(15, 23, 42, 0.8);
+  }
+  
+  .hero-gradient {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+  }
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes scroll-right {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.animate-scroll-left {
+  animation: scroll-left 30s linear infinite;
+}
+
+.animate-scroll-right {
+  animation: scroll-right 30s linear infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.moving-belt {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.belt-content {
+  display: inline-block;
+  padding-left: 100%;
+}

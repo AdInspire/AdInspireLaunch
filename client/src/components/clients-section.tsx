@@ -1,0 +1,74 @@
+import { motion } from "framer-motion";
+
+export default function ClientsSection() {
+  const clients = [
+    { name: "TechCorp Solutions", initials: "TC", color: "bg-blue-500" },
+    { name: "Global Logistics", initials: "GL", color: "bg-purple-500" },
+    { name: "EcoInnovate", initials: "EI", color: "bg-green-500" },
+    { name: "Fashion Metro", initials: "FM", color: "bg-orange-500" },
+    { name: "FoodieGourmet", initials: "FG", color: "bg-red-500" },
+    { name: "Digital Health", initials: "DH", color: "bg-indigo-500" },
+  ];
+
+  const clientsRow2 = [
+    { name: "SmartFinance", initials: "SF", color: "bg-yellow-500" },
+    { name: "Beauty Glow", initials: "BG", color: "bg-pink-500" },
+    { name: "AutoFlex Motors", initials: "AF", color: "bg-teal-500" },
+    { name: "HealthHub Pro", initials: "HH", color: "bg-cyan-500" },
+    { name: "Green Architecture", initials: "GA", color: "bg-lime-500" },
+    { name: "Luxury Interiors", initials: "LI", color: "bg-violet-500" },
+  ];
+
+  const ClientBelt = ({ clients, direction = "left" }: { clients: typeof clients, direction?: "left" | "right" }) => (
+    <div className="moving-belt mb-8">
+      <div className={`belt-content ${direction === "left" ? "animate-scroll-left" : "animate-scroll-right"}`}>
+        <div className="inline-flex items-center space-x-12">
+          {[...clients, ...clients, ...clients].map((client, index) => (
+            <div
+              key={`${client.initials}-${index}`}
+              className="flex items-center space-x-4 bg-slate-700 px-6 py-4 rounded-lg whitespace-nowrap"
+              data-testid={`client-${client.initials.toLowerCase()}-${index}`}
+            >
+              <div className={`w-10 h-10 ${client.color} rounded-full flex items-center justify-center`}>
+                <span className="text-white font-bold">{client.initials}</span>
+              </div>
+              <span className="text-white font-semibold">{client.name}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
+    <section 
+      id="clients" 
+      className="py-20 bg-slate-800 overflow-hidden"
+      data-testid="clients-section"
+    >
+      <div className="max-w-7xl mx-auto px-6">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-5xl md:text-6xl font-black uppercase mb-6 text-white">
+            THE CLIENTS WE ONBOARDED
+          </h2>
+          <p className="text-xl text-gray-300">
+            Trusted by industry leaders and growing businesses worldwide
+          </p>
+          <div className="w-24 h-2 bg-gradient-to-r from-green-500 to-blue-500 mx-auto rounded-full mt-6"></div>
+        </motion.div>
+      </div>
+
+      {/* First Belt - Moving Left */}
+      <ClientBelt clients={clients} direction="left" />
+
+      {/* Second Belt - Moving Right */}
+      <ClientBelt clients={clientsRow2} direction="right" />
+    </section>
+  );
+}
