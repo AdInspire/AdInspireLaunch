@@ -1,4 +1,5 @@
 import { Facebook, Twitter, Linkedin, Instagram, Mail, Phone, MapPin } from "lucide-react";
+import logoImage from "@assets/Untitled_design__1_-removebg-preview_1755947894247.png";
 
 export default function Footer() {
   const scrollToSection = (sectionId: string) => {
@@ -45,8 +46,15 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="md:col-span-2">
-            <div className="text-3xl font-bold text-white mb-4" data-testid="footer-logo">
-              <span className="text-blue-400">AD</span>INSPIRE
+            <div className="flex items-center space-x-3 mb-4" data-testid="footer-logo">
+              <img 
+                src={logoImage} 
+                alt="ADINSPIRE Logo" 
+                className="w-12 h-12"
+              />
+              <span className="text-3xl font-bold text-white">
+                <span className="text-blue-400">AD</span>INSPIRE
+              </span>
             </div>
             <p className="text-gray-400 mb-6 leading-relaxed">
               Igniting brands and inspiring growth through innovative digital

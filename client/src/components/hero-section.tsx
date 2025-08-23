@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import logoImage from "@assets/Untitled_design__1_-removebg-preview_1755947894247.png";
 
 export default function HeroSection() {
   const scrollToSection = (sectionId: string) => {
@@ -34,11 +35,18 @@ export default function HeroSection() {
           transition={{ duration: 0.6 }}
           data-testid="hero-content"
         >
-          <h1 className="text-6xl md:text-8xl font-black uppercase mb-6 leading-tight">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-orange-500">
-              ADINSPIRE
-            </span>
-          </h1>
+          <div className="flex flex-col items-center mb-6">
+            <img 
+              src={logoImage} 
+              alt="ADINSPIRE Logo" 
+              className="w-24 h-24 md:w-32 md:h-32 mb-4"
+            />
+            <h1 className="text-6xl md:text-8xl font-black uppercase leading-tight">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-orange-500">
+                ADINSPIRE
+              </span>
+            </h1>
+          </div>
 
           <h2 className="text-2xl md:text-4xl font-bold uppercase mb-8 text-gray-200">
             IGNITING BRANDS, INSPIRING GROWTH

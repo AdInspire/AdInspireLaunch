@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import logoImage from "@assets/Untitled_design__1_-removebg-preview_1755947894247.png";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -42,11 +43,18 @@ export default function Navbar() {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <div 
-            className="text-2xl font-bold text-white cursor-pointer"
+            className="flex items-center space-x-3 cursor-pointer"
             onClick={() => scrollToSection("home")}
             data-testid="logo"
           >
-            <span className="text-blue-400">AD</span>INSPIRE
+            <img 
+              src={logoImage} 
+              alt="ADINSPIRE Logo" 
+              className="w-10 h-10"
+            />
+            <span className="text-2xl font-bold text-white">
+              <span className="text-blue-400">AD</span>INSPIRE
+            </span>
           </div>
 
           {/* Desktop Navigation */}
