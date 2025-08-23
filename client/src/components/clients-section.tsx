@@ -19,23 +19,27 @@ export default function ClientsSection() {
     { name: "Luxury Interiors", initials: "LI", color: "bg-violet-500" },
   ];
 
-  const ClientBelt = ({ clients, direction = "left" }: { clients: typeof clients, direction?: "left" | "right" }) => (
+  interface Client {
+    name: string;
+    initials: string;
+    color: string;
+  }
+
+  const ClientBelt = ({ clients, direction = "left" }: { clients: Client[], direction?: "left" | "right" }) => (
     <div className="moving-belt mb-8">
       <div className={`belt-content ${direction === "left" ? "animate-scroll-left" : "animate-scroll-right"}`}>
-        <div className="inline-flex items-center space-x-12">
-          {[...clients, ...clients, ...clients].map((client, index) => (
-            <div
-              key={`${client.initials}-${index}`}
-              className="flex items-center space-x-4 bg-slate-700 px-6 py-4 rounded-lg whitespace-nowrap"
-              data-testid={`client-${client.initials.toLowerCase()}-${index}`}
-            >
-              <div className={`w-10 h-10 ${client.color} rounded-full flex items-center justify-center`}>
-                <span className="text-white font-bold">{client.initials}</span>
-              </div>
-              <span className="text-white font-semibold">{client.name}</span>
+        {[...clients, ...clients, ...clients, ...clients].map((client, index) => (
+          <div
+            key={`${client.initials}-${index}`}
+            className="flex items-center space-x-4 bg-slate-700 px-6 py-4 rounded-lg whitespace-nowrap mr-12"
+            data-testid={`client-${client.initials.toLowerCase()}-${index}`}
+          >
+            <div className={`w-10 h-10 ${client.color} rounded-full flex items-center justify-center`}>
+              <span className="text-white font-bold">{client.initials}</span>
             </div>
-          ))}
-        </div>
+            <span className="text-white font-semibold">{client.name}</span>
+          </div>
+        ))}
       </div>
     </div>
   );

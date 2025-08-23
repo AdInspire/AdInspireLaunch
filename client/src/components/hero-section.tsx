@@ -11,7 +11,7 @@ export default function HeroSection() {
   return (
     <section
       id="home"
-      className="min-h-screen hero-gradient flex items-center justify-center relative overflow-hidden"
+      className="min-h-screen hero-gradient flex items-center justify-center relative overflow-hidden pt-24"
       data-testid="hero-section"
     >
       {/* Background Animation Elements */}
