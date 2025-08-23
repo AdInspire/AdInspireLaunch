@@ -28,16 +28,16 @@ export default function ClientsSection() {
   const ClientBelt = ({ clients, direction = "left" }: { clients: Client[], direction?: "left" | "right" }) => (
     <div className="moving-belt mb-8">
       <div className={`belt-content ${direction === "left" ? "animate-scroll-left" : "animate-scroll-right"}`}>
-        {[...clients, ...clients, ...clients, ...clients].map((client, index) => (
+        {[...clients, ...clients, ...clients].map((client, index) => (
           <div
             key={`${client.initials}-${index}`}
-            className="flex items-center space-x-4 bg-slate-700 px-6 py-4 rounded-lg whitespace-nowrap mr-12"
+            className="flex items-center space-x-4 bg-slate-700/80 backdrop-blur-sm px-8 py-5 rounded-xl whitespace-nowrap mr-16 border border-slate-500/30 shadow-lg hover:bg-slate-600/80 transition-colors duration-300"
             data-testid={`client-${client.initials.toLowerCase()}-${index}`}
           >
-            <div className={`w-10 h-10 ${client.color} rounded-full flex items-center justify-center`}>
-              <span className="text-white font-bold">{client.initials}</span>
+            <div className={`w-12 h-12 ${client.color} rounded-full flex items-center justify-center shadow-md`}>
+              <span className="text-white font-bold text-lg">{client.initials}</span>
             </div>
-            <span className="text-white font-semibold">{client.name}</span>
+            <span className="text-white font-semibold text-lg">{client.name}</span>
           </div>
         ))}
       </div>
