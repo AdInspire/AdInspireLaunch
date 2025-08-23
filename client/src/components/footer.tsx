@@ -41,7 +41,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-slate-900 border-t border-slate-700 py-16" data-testid="footer">
+    <footer className="py-16 border-t border-gray-300" style={{backgroundColor: '#333333'}} data-testid="footer">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-4 gap-8">
           {/* Company Info */}
@@ -56,7 +56,7 @@ export default function Footer() {
                 <span className="text-blue-400">AD</span>INSPIRE
               </span>
             </div>
-            <p className="text-gray-400 mb-6 leading-relaxed">
+            <p className="text-gray-300 mb-6 leading-relaxed">
               Igniting brands and inspiring growth through innovative digital
               marketing strategies. We transform businesses and help them reach
               their full potential in the digital landscape.
@@ -83,7 +83,7 @@ export default function Footer() {
                 <li key={link.id}>
                   <button
                     onClick={() => scrollToSection(link.id)}
-                    className="text-gray-400 hover:text-white transition-colors text-left"
+                    className="text-gray-300 hover:text-white transition-colors text-left"
                     data-testid={`footer-link-${link.id}`}
                   >
                     {link.name}
@@ -100,7 +100,7 @@ export default function Footer() {
               {contactInfo.map((contact, index) => (
                 <li key={index} className="flex items-start space-x-3" data-testid={`contact-info-footer-${index}`}>
                   {contact.icon}
-                  <span className="text-gray-400 whitespace-pre-line">
+                  <span className="text-gray-300 whitespace-pre-line">
                     {contact.text}
                   </span>
                 </li>
@@ -110,7 +110,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-slate-700 mt-12 pt-8 text-center">
-          <p className="text-gray-400" data-testid="copyright">
+          <p className="text-gray-300" data-testid="copyright">
             © 2024 ADINSPIRE. All rights reserved. | Privacy Policy | Terms of Service
           </p>
         </div>

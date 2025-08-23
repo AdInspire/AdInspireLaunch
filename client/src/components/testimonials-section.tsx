@@ -63,7 +63,7 @@ export default function TestimonialsSection() {
   return (
     <section 
       id="testimonials" 
-      className="py-20 bg-gradient-to-b from-slate-900 to-slate-800"
+      className="py-20" style={{backgroundColor: '#EAE8E1'}}
       data-testid="testimonials-section"
     >
       <div className="max-w-7xl mx-auto px-6">
@@ -74,20 +74,20 @@ export default function TestimonialsSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-5xl md:text-6xl font-black uppercase mb-6 text-white">
+          <h2 className="text-5xl md:text-6xl font-black uppercase mb-6 text-gray-800">
             CLIENT TESTIMONIALS
           </h2>
-          <p className="text-xl text-gray-300">
+          <p className="text-xl text-gray-600">
             What our satisfied clients say about working with ADINSPIRE
           </p>
-          <div className="w-24 h-2 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full mt-6"></div>
+          <div className="w-24 h-2 bg-gradient-to-r from-yellow-500 to-blue-600 mx-auto rounded-full mt-6"></div>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           {testimonials.slice(0, 3).map((testimonial, index) => (
             <motion.div
               key={index}
-              className="bg-slate-800/80 backdrop-blur-sm p-8 rounded-2xl border border-slate-600 cursor-pointer group transition-all duration-400 hover:transform hover:-translate-y-2 hover:scale-105 hover:shadow-2xl"
+              className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl border border-gray-200 cursor-pointer group transition-all duration-400 hover:transform hover:-translate-y-2 hover:scale-105 hover:shadow-2xl"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -99,8 +99,8 @@ export default function TestimonialsSection() {
                   <span className="text-white font-bold text-lg">{testimonial.initials}</span>
                 </div>
                 <div>
-                  <h4 className="text-white font-bold text-lg">{testimonial.name}</h4>
-                  <p className="text-gray-400">{testimonial.title}</p>
+                  <h4 className="text-gray-800 font-bold text-lg">{testimonial.name}</h4>
+                  <p className="text-gray-500">{testimonial.title}</p>
                 </div>
               </div>
 
@@ -110,14 +110,14 @@ export default function TestimonialsSection() {
                     <Star key={star} className="w-4 h-4 fill-current" />
                   ))}
                 </div>
-                <p className="text-gray-300 italic">"{testimonial.testimonial}"</p>
+                <p className="text-gray-600 italic">"{testimonial.testimonial}"</p>
               </div>
 
               <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <p className={`${testimonial.color} font-semibold`}>
                   Project: {testimonial.project}
                 </p>
-                <p className="text-gray-400 text-sm">
+                <p className="text-gray-500 text-sm">
                   Duration: {testimonial.duration} | ROI: {testimonial.roi}
                 </p>
               </div>
@@ -130,7 +130,7 @@ export default function TestimonialsSection() {
           {testimonials.slice(3).map((testimonial, index) => (
             <motion.div
               key={index + 3}
-              className="bg-slate-800/80 backdrop-blur-sm p-8 rounded-2xl border border-slate-600 cursor-pointer group transition-all duration-400 hover:transform hover:-translate-y-2 hover:scale-105 hover:shadow-2xl"
+              className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl border border-gray-200 cursor-pointer group transition-all duration-400 hover:transform hover:-translate-y-2 hover:scale-105 hover:shadow-2xl"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -142,8 +142,8 @@ export default function TestimonialsSection() {
                   <span className="text-white font-bold text-lg">{testimonial.initials}</span>
                 </div>
                 <div>
-                  <h4 className="text-white font-bold text-lg">{testimonial.name}</h4>
-                  <p className="text-gray-400">{testimonial.title}</p>
+                  <h4 className="text-gray-800 font-bold text-lg">{testimonial.name}</h4>
+                  <p className="text-gray-500">{testimonial.title}</p>
                 </div>
               </div>
 
@@ -153,14 +153,14 @@ export default function TestimonialsSection() {
                     <Star key={star} className="w-4 h-4 fill-current" />
                   ))}
                 </div>
-                <p className="text-gray-300 italic">"{testimonial.testimonial}"</p>
+                <p className="text-gray-600 italic">"{testimonial.testimonial}"</p>
               </div>
 
               <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <p className={`${testimonial.color} font-semibold`}>
                   Project: {testimonial.project}
                 </p>
-                <p className="text-gray-400 text-sm">
+                <p className="text-gray-500 text-sm">
                   Duration: {testimonial.duration} | ROI: {testimonial.roi}
                 </p>
               </div>

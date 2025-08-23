@@ -2,13 +2,13 @@ import { motion } from "framer-motion";
 
 export default function AboutSection() {
   return (
-    <section id="about" className="py-20 bg-slate-800" data-testid="about-section">
+    <section id="about" className="py-20" style={{backgroundColor: '#EAE8E1'}} data-testid="about-section">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl font-black uppercase mb-6 text-white">
+          <h2 className="text-5xl md:text-6xl font-black uppercase mb-6 text-gray-800">
             WHAT DO WE DO
           </h2>
-          <div className="w-24 h-2 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"></div>
+          <div className="w-24 h-2 bg-gradient-to-r from-yellow-500 to-blue-600 mx-auto rounded-full"></div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -20,25 +20,25 @@ export default function AboutSection() {
             transition={{ duration: 0.6 }}
             data-testid="about-content"
           >
-            <h3 className="text-3xl md:text-4xl font-bold text-blue-400 uppercase">
+            <h3 className="text-3xl md:text-4xl font-bold text-blue-600 uppercase">
               ABOUT ADINSPIRE
             </h3>
 
-            <p className="text-lg text-gray-300 leading-relaxed">
+            <p className="text-lg text-gray-600 leading-relaxed">
               ADINSPIRE is a cutting-edge digital marketing agency that
               specializes in transforming businesses through innovative marketing
               strategies. We are passionate about helping brands reach their full
               potential in the digital landscape.
             </p>
 
-            <p className="text-lg text-gray-300 leading-relaxed">
+            <p className="text-lg text-gray-600 leading-relaxed">
               Our team of experts combines creativity with data-driven insights to
               deliver exceptional results. We understand that every business is
               unique, which is why we craft personalized marketing solutions that
               align with your specific goals and target audience.
             </p>
 
-            <p className="text-lg text-gray-300 leading-relaxed">
+            <p className="text-lg text-gray-600 leading-relaxed">
               From startups to established enterprises, we've helped countless
               businesses amplify their online presence, increase brand awareness,
               and drive sustainable growth through strategic digital marketing
@@ -46,15 +46,15 @@ export default function AboutSection() {
             </p>
 
             <div className="grid grid-cols-2 gap-6 mt-8">
-              <div className="text-center p-6 bg-slate-700 rounded-lg">
-                <div className="text-3xl font-bold text-blue-400 mb-2" data-testid="projects-stat">150+</div>
-                <div className="text-gray-300 uppercase font-semibold">
+              <div className="text-center p-6 bg-white rounded-lg shadow-md">
+                <div className="text-3xl font-bold text-blue-600 mb-2" data-testid="projects-stat">150+</div>
+                <div className="text-gray-600 uppercase font-semibold">
                   Projects Completed
                 </div>
               </div>
-              <div className="text-center p-6 bg-slate-700 rounded-lg">
-                <div className="text-3xl font-bold text-purple-400 mb-2" data-testid="satisfaction-stat">98%</div>
-                <div className="text-gray-300 uppercase font-semibold">
+              <div className="text-center p-6 bg-white rounded-lg shadow-md">
+                <div className="text-3xl font-bold text-yellow-600 mb-2" data-testid="satisfaction-stat">98%</div>
+                <div className="text-gray-600 uppercase font-semibold">
                   Client Satisfaction
                 </div>
               </div>
@@ -74,7 +74,7 @@ export default function AboutSection() {
               alt="Modern office workspace with team collaboration"
               className="rounded-2xl shadow-2xl w-full h-auto"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-blue-600/20 to-transparent rounded-2xl"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-yellow-400/10 to-transparent rounded-2xl"></div>
           </motion.div>
         </div>
       </div>
