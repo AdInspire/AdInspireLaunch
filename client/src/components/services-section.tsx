@@ -47,26 +47,26 @@ export default function ServicesSection() {
   return (
     <section 
       id="services" 
-      className="py-20" style={{backgroundColor: '#0B1426'}}
+      className="py-20" style={{backgroundColor: '#2D3748'}}
       data-testid="services-section"
     >
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl font-black uppercase mb-6 text-slate-100">
+          <h2 className="text-5xl md:text-6xl font-black uppercase mb-6 text-gray-100">
             OUR SERVICES
           </h2>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Comprehensive digital marketing solutions to elevate your brand and
             drive measurable results
           </p>
-          <div className="w-24 h-2 bg-gradient-to-r from-amber-400 to-blue-500 mx-auto rounded-full mt-6"></div>
+          <div className="w-24 h-2 bg-gradient-to-r from-yellow-500 to-blue-600 mx-auto rounded-full mt-6"></div>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <motion.div
               key={index}
-              className={`bg-slate-800/80 backdrop-blur-sm p-8 rounded-2xl border border-slate-600 hover:border-amber-400/50 hover:shadow-xl transition-all duration-300 group`}
+              className={`bg-gray-700/80 backdrop-blur-sm p-8 rounded-2xl border border-gray-600 hover:border-yellow-500/50 hover:shadow-xl transition-all duration-300 group`}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -76,13 +76,13 @@ export default function ServicesSection() {
               <div className={`${service.color} text-4xl mb-6 group-hover:scale-110 transition-transform duration-300`}>
                 {service.icon}
               </div>
-              <h3 className="text-2xl font-bold text-slate-100 mb-4 uppercase">
+              <h3 className="text-2xl font-bold text-gray-100 mb-4 uppercase">
                 {service.title}
               </h3>
-              <p className="text-slate-300 mb-6">
+              <p className="text-gray-300 mb-6">
                 {service.description}
               </p>
-              <ul className="space-y-2 text-slate-400">
+              <ul className="space-y-2 text-gray-400">
                 {service.features.map((feature, featureIndex) => (
                   <li key={featureIndex} className="flex items-center" data-testid={`feature-${index}-${featureIndex}`}>
                     <Check className="w-4 h-4 text-green-400 mr-2" />

@@ -3,48 +3,48 @@
 @tailwind utilities;
 
 :root {
-  --background: #0B1426;
-  --foreground: #E2E8F0;
-  --card: #1E293B;
-  --card-foreground: #E2E8F0;
-  --popover: #1E293B;
-  --popover-foreground: #E2E8F0;
-  --primary: #F59E0B;
+  --background: #2D3748;
+  --foreground: #F7FAFC;
+  --card: #4A5568;
+  --card-foreground: #F7FAFC;
+  --popover: #4A5568;
+  --popover-foreground: #F7FAFC;
+  --primary: #D69E2E;
   --primary-foreground: #FFFFFF;
-  --secondary: #334155;
-  --secondary-foreground: #E2E8F0;
-  --muted: #334155;
-  --muted-foreground: #94A3B8;
-  --accent: #F59E0B;
+  --secondary: #718096;
+  --secondary-foreground: #F7FAFC;
+  --muted: #718096;
+  --muted-foreground: #CBD5E0;
+  --accent: #D69E2E;
   --accent-foreground: #FFFFFF;
   --destructive: hsl(0 62% 50%);
   --destructive-foreground: #FFFFFF;
-  --border: #334155;
-  --input: #1E293B;
-  --ring: #F59E0B;
+  --border: #718096;
+  --input: #4A5568;
+  --ring: #D69E2E;
   --radius: 0.5rem;
 }
 
 .dark {
-  --background: #0B1426;
-  --foreground: #E2E8F0;
-  --card: #1E293B;
-  --card-foreground: #E2E8F0;
-  --popover: #1E293B;
-  --popover-foreground: #E2E8F0;
-  --primary: #F59E0B;
+  --background: #2D3748;
+  --foreground: #F7FAFC;
+  --card: #4A5568;
+  --card-foreground: #F7FAFC;
+  --popover: #4A5568;
+  --popover-foreground: #F7FAFC;
+  --primary: #D69E2E;
   --primary-foreground: #FFFFFF;
-  --secondary: #334155;
-  --secondary-foreground: #E2E8F0;
-  --muted: #334155;
-  --muted-foreground: #94A3B8;
-  --accent: #F59E0B;
+  --secondary: #718096;
+  --secondary-foreground: #F7FAFC;
+  --muted: #718096;
+  --muted-foreground: #CBD5E0;
+  --accent: #D69E2E;
   --accent-foreground: #FFFFFF;
   --destructive: hsl(0 62% 50%);
   --destructive-foreground: #FFFFFF;
-  --border: #334155;
-  --input: #1E293B;
-  --ring: #F59E0B;
+  --border: #718096;
+  --input: #4A5568;
+  --ring: #D69E2E;
 }
 
 @layer base {
@@ -53,8 +53,8 @@
   }
   body {
     @apply bg-background text-foreground font-inter;
-    background-color: #0B1426;
-    color: #E2E8F0;
+    background-color: #2D3748;
+    color: #F7FAFC;
   }
   html {
     scroll-behavior: smooth;
@@ -64,8 +64,8 @@
 @layer utilities {
   .navbar-blur {
     backdrop-filter: blur(12px);
-    background: rgba(11, 20, 38, 0.95);
-    border-bottom: 1px solid #334155;
+    background: rgba(45, 55, 72, 0.95);
+    border-bottom: 1px solid #718096;
   }
   
   .hero-gradient {
@@ -112,7 +112,7 @@
 }
 
 .hero-gradient-enhanced {
-  background: linear-gradient(135deg, #0B1426 0%, #1E293B 50%, #0F172A 100%);
+  background: linear-gradient(135deg, #2D3748 0%, #4A5568 50%, #1A202C 100%);
   position: relative;
 }
 
@@ -123,6 +123,6 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at 50% 30%, rgba(245, 158, 11, 0.1) 0%, rgba(59, 130, 246, 0.05) 40%, transparent 70%);
+  background: radial-gradient(circle at 50% 30%, rgba(214, 158, 46, 0.15) 0%, rgba(37, 99, 235, 0.08) 40%, transparent 70%);
   pointer-events: none;
 }

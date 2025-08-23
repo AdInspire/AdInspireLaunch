@@ -86,20 +86,20 @@ export default function ContactSection() {
   return (
     <section 
       id="contact" 
-      className="py-20 relative" style={{backgroundColor: '#0B1426'}}
+      className="py-20 relative" style={{backgroundColor: '#2D3748'}}
       data-testid="contact-section"
     >
-      <div className="absolute inset-0 bg-gradient-to-r from-amber-400/10 to-blue-500/10"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/8 to-blue-500/8"></div>
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl font-black uppercase mb-6 text-slate-100">
+          <h2 className="text-5xl md:text-6xl font-black uppercase mb-6 text-gray-100">
             READY TO GROW?
           </h2>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto mb-8">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
             If you want help to grow your business even further, work with us.
             Let's transform your digital presence together.
           </p>
-          <div className="w-24 h-2 bg-gradient-to-r from-amber-400 to-blue-500 mx-auto rounded-full"></div>
+          <div className="w-24 h-2 bg-gradient-to-r from-yellow-500 to-blue-600 mx-auto rounded-full"></div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 items-start">
@@ -111,11 +111,11 @@ export default function ContactSection() {
             transition={{ duration: 0.6 }}
             data-testid="contact-info"
           >
-            <h3 className="text-3xl font-bold text-slate-100 uppercase">
+            <h3 className="text-3xl font-bold text-gray-100 uppercase">
               LET'S START YOUR SUCCESS STORY
             </h3>
 
-            <p className="text-lg text-slate-300">
+            <p className="text-lg text-gray-300">
               Our team is ready to help you achieve unprecedented growth. Whether
               you're launching a new product, expanding your market reach, or
               looking to optimize your existing campaigns, we have the expertise
@@ -129,8 +129,8 @@ export default function ContactSection() {
                     {info.icon}
                   </div>
                   <div>
-                    <div className="font-semibold text-slate-100">{info.title}</div>
-                    <div className="text-slate-400">{info.subtitle}</div>
+                    <div className="font-semibold text-gray-100">{info.title}</div>
+                    <div className="text-gray-400">{info.subtitle}</div>
                   </div>
                 </div>
               ))}
@@ -138,7 +138,7 @@ export default function ContactSection() {
           </motion.div>
 
           <motion.div
-            className="bg-slate-800/90 backdrop-blur-sm p-8 rounded-2xl border border-slate-600 shadow-xl"
+            className="bg-gray-700/90 backdrop-blur-sm p-8 rounded-2xl border border-gray-600 shadow-xl"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -147,7 +147,7 @@ export default function ContactSection() {
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label className="block text-slate-200 font-semibold mb-2">
+                <label className="block text-gray-200 font-semibold mb-2">
                   Full Name
                 </label>
                 <Input
@@ -155,7 +155,7 @@ export default function ContactSection() {
                   name="fullName"
                   value={formData.fullName}
                   onChange={handleChange}
-                  className="w-full bg-slate-700 border-slate-500 text-slate-100 focus:border-amber-400"
+                  className="w-full bg-gray-600 border-gray-500 text-gray-100 focus:border-yellow-500"
                   placeholder="Enter your full name"
                   required
                   data-testid="input-fullname"
@@ -163,7 +163,7 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label className="block text-slate-200 font-semibold mb-2">
+                <label className="block text-gray-200 font-semibold mb-2">
                   Email Address
                 </label>
                 <Input
@@ -171,7 +171,7 @@ export default function ContactSection() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full bg-slate-700 border-slate-500 text-slate-100 focus:border-amber-400"
+                  className="w-full bg-gray-600 border-gray-500 text-gray-100 focus:border-yellow-500"
                   placeholder="Enter your email"
                   required
                   data-testid="input-email"
@@ -179,7 +179,7 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label className="block text-slate-200 font-semibold mb-2">
+                <label className="block text-gray-200 font-semibold mb-2">
                   Company
                 </label>
                 <Input
@@ -187,14 +187,14 @@ export default function ContactSection() {
                   name="company"
                   value={formData.company}
                   onChange={handleChange}
-                  className="w-full bg-slate-700 border-slate-500 text-slate-100 focus:border-amber-400"
+                  className="w-full bg-gray-600 border-gray-500 text-gray-100 focus:border-yellow-500"
                   placeholder="Your company name"
                   data-testid="input-company"
                 />
               </div>
 
               <div>
-                <label className="block text-slate-200 font-semibold mb-2">
+                <label className="block text-gray-200 font-semibold mb-2">
                   Project Details
                 </label>
                 <Textarea
@@ -202,7 +202,7 @@ export default function ContactSection() {
                   value={formData.projectDetails}
                   onChange={handleChange}
                   rows={4}
-                  className="w-full bg-slate-700 border-slate-500 text-slate-100 focus:border-amber-400 resize-none"
+                  className="w-full bg-gray-600 border-gray-500 text-gray-100 focus:border-yellow-500 resize-none"
                   placeholder="Tell us about your project..."
                   required
                   data-testid="input-project-details"
@@ -212,7 +212,7 @@ export default function ContactSection() {
               <Button
                 type="submit"
                 disabled={submitContactMutation.isPending}
-                className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold py-4 rounded-lg transition-all duration-300 transform hover:scale-105"
+                className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white font-bold py-4 rounded-lg transition-all duration-300 transform hover:scale-105"
                 data-testid="submit-button"
               >
                 {submitContactMutation.isPending ? (

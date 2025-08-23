@@ -53,7 +53,7 @@ export default function Footer() {
                 className="w-12 h-12"
               />
               <span className="text-3xl font-bold">
-                <span className="text-blue-300">AD</span><span className="text-amber-400">INSPIRE</span>
+                <span className="text-blue-900">AD</span><span className="text-yellow-500">INSPIRE</span>
               </span>
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed">

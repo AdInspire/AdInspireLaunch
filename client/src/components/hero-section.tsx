@@ -45,30 +45,30 @@ export default function HeroSection() {
               />
             </div>
             <h1 className="text-6xl md:text-8xl font-black uppercase leading-tight">
-              <span className="text-blue-300">AD</span><span className="text-amber-400">INSPIRE</span>
+              <span className="text-blue-900">AD</span><span className="text-yellow-500">INSPIRE</span>
             </h1>
           </div>
 
-          <h2 className="text-2xl md:text-4xl font-bold uppercase mb-8 text-slate-300">
+          <h2 className="text-2xl md:text-4xl font-bold uppercase mb-8 text-gray-300">
             IGNITING BRANDS, INSPIRING GROWTH
           </h2>
 
-          <p className="text-xl md:text-2xl font-semibold uppercase mb-8 text-slate-400 max-w-4xl mx-auto">
+          <p className="text-xl md:text-2xl font-semibold uppercase mb-8 text-gray-400 max-w-4xl mx-auto">
             OUR GOAL: TRANSFORMING BUSINESSES THROUGH INNOVATIVE DIGITAL
             MARKETING STRATEGIES
           </p>
 
-          <div className="flex flex-col md:flex-row gap-6 justify-center items-center mt-12">
+          <div className="flex flex-col md:flex-row gap-6 justify-center items-center mt-12 mb-16">
             <button
               onClick={() => scrollToSection("contact")}
-              className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold py-4 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+              className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold py-4 px-10 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-lg w-64"
               data-testid="cta-button"
             >
               START YOUR JOURNEY
             </button>
             <button
               onClick={() => scrollToSection("about")}
-              className="border-2 border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white font-bold py-4 px-8 rounded-full text-lg transition-all duration-300"
+              className="border-2 border-gray-400 text-gray-300 hover:bg-gray-600 hover:text-white font-bold py-4 px-10 rounded-full text-lg transition-all duration-300 w-64"
               data-testid="learn-more-button"
             >
               LEARN MORE

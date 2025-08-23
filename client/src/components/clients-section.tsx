@@ -31,13 +31,13 @@ export default function ClientsSection() {
         {[...clients, ...clients, ...clients].map((client, index) => (
           <div
             key={`${client.initials}-${index}`}
-            className="flex items-center space-x-4 bg-slate-800/90 backdrop-blur-sm px-8 py-5 rounded-xl whitespace-nowrap mr-16 border border-slate-600 shadow-lg hover:border-amber-400/50 transition-colors duration-300"
+            className="flex items-center space-x-4 bg-gray-700/90 backdrop-blur-sm px-8 py-5 rounded-xl whitespace-nowrap mr-16 border border-gray-600 shadow-lg hover:border-yellow-500/50 transition-colors duration-300"
             data-testid={`client-${client.initials.toLowerCase()}-${index}`}
           >
             <div className={`w-12 h-12 ${client.color} rounded-full flex items-center justify-center shadow-md`}>
               <span className="text-white font-bold text-lg">{client.initials}</span>
             </div>
-            <span className="text-slate-100 font-semibold text-lg">{client.name}</span>
+            <span className="text-gray-100 font-semibold text-lg">{client.name}</span>
           </div>
         ))}
       </div>
@@ -47,7 +47,7 @@ export default function ClientsSection() {
   return (
     <section 
       id="clients" 
-      className="py-20 overflow-hidden" style={{backgroundColor: '#1E293B'}}
+      className="py-20 overflow-hidden" style={{backgroundColor: '#4A5568'}}
       data-testid="clients-section"
     >
       <div className="max-w-7xl mx-auto px-6">
@@ -58,13 +58,13 @@ export default function ClientsSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-5xl md:text-6xl font-black uppercase mb-6 text-slate-100">
+          <h2 className="text-5xl md:text-6xl font-black uppercase mb-6 text-gray-100">
             THE CLIENTS WE ONBOARDED
           </h2>
-          <p className="text-xl text-slate-300">
+          <p className="text-xl text-gray-300">
             Trusted by industry leaders and growing businesses worldwide
           </p>
-          <div className="w-24 h-2 bg-gradient-to-r from-amber-400 to-blue-500 mx-auto rounded-full mt-6"></div>
+          <div className="w-24 h-2 bg-gradient-to-r from-yellow-500 to-blue-600 mx-auto rounded-full mt-6"></div>
         </motion.div>
       </div>
 
