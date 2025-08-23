@@ -16,14 +16,14 @@ export default function HeroSection() {
       data-testid="hero-section"
     >
       {/* Background Animation Elements */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-r from-yellow-300 to-yellow-400 rounded-full mix-blend-multiply filter blur-2xl animate-float"></div>
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-r from-amber-400 to-amber-500 rounded-full mix-blend-screen filter blur-2xl animate-float"></div>
         <div
-          className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-blue-300 to-blue-400 rounded-full mix-blend-multiply filter blur-2xl animate-float"
+          className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-blue-400 to-blue-500 rounded-full mix-blend-screen filter blur-2xl animate-float"
           style={{ animationDelay: "2s" }}
         ></div>
         <div
-          className="absolute top-40 right-20 w-96 h-96 bg-gradient-to-r from-yellow-200 to-blue-200 rounded-full mix-blend-multiply filter blur-2xl animate-float"
+          className="absolute top-40 right-20 w-96 h-96 bg-gradient-to-r from-amber-300 to-blue-300 rounded-full mix-blend-screen filter blur-2xl animate-float"
           style={{ animationDelay: "4s" }}
         ></div>
       </div>
@@ -37,7 +37,7 @@ export default function HeroSection() {
         >
           <div className="flex flex-col items-center mb-6">
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 via-yellow-400 to-blue-600 rounded-full blur-xl opacity-30 scale-125 animate-pulse"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 via-amber-400 to-blue-500 rounded-full blur-xl opacity-40 scale-125 animate-pulse"></div>
               <img 
                 src={logoImage} 
                 alt="ADINSPIRE Logo" 
@@ -45,15 +45,15 @@ export default function HeroSection() {
               />
             </div>
             <h1 className="text-6xl md:text-8xl font-black uppercase leading-tight">
-              <span className="text-blue-600">AD</span><span className="text-yellow-600">INSPIRE</span>
+              <span className="text-blue-300">AD</span><span className="text-amber-400">INSPIRE</span>
             </h1>
           </div>
 
-          <h2 className="text-2xl md:text-4xl font-bold uppercase mb-8 text-gray-600">
+          <h2 className="text-2xl md:text-4xl font-bold uppercase mb-8 text-slate-300">
             IGNITING BRANDS, INSPIRING GROWTH
           </h2>
 
-          <p className="text-xl md:text-2xl font-semibold uppercase mb-8 text-gray-500 max-w-4xl mx-auto">
+          <p className="text-xl md:text-2xl font-semibold uppercase mb-8 text-slate-400 max-w-4xl mx-auto">
             OUR GOAL: TRANSFORMING BUSINESSES THROUGH INNOVATIVE DIGITAL
             MARKETING STRATEGIES
           </p>
@@ -61,7 +61,7 @@ export default function HeroSection() {
           <div className="flex flex-col md:flex-row gap-6 justify-center items-center mt-12">
             <button
               onClick={() => scrollToSection("contact")}
-              className="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white font-bold py-4 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+              className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold py-4 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
               data-testid="cta-button"
             >
               START YOUR JOURNEY

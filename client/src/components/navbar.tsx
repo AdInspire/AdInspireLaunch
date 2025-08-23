@@ -53,7 +53,7 @@ export default function Navbar() {
               className="w-10 h-10"
             />
             <span className="text-2xl font-bold">
-              <span className="text-blue-600">AD</span><span className="text-yellow-600">INSPIRE</span>
+              <span className="text-blue-300">AD</span><span className="text-amber-400">INSPIRE</span>
             </span>
           </div>
 
@@ -63,7 +63,7 @@ export default function Navbar() {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="text-gray-700 hover:text-yellow-600 transition-colors duration-300 font-medium"
+                className="text-slate-300 hover:text-amber-400 transition-colors duration-300 font-medium"
                 data-testid={`nav-${item.id}`}
               >
                 {item.name}
@@ -75,7 +75,7 @@ export default function Navbar() {
           <div className="md:hidden">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-gray-700 hover:text-yellow-600 transition-colors"
+              className="text-slate-300 hover:text-amber-400 transition-colors"
               data-testid="mobile-menu-toggle"
             >
               {isMobileMenuOpen ? (
@@ -95,7 +95,7 @@ export default function Navbar() {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-gray-700 hover:text-yellow-600 transition-colors font-medium text-left"
+                  className="text-slate-300 hover:text-amber-400 transition-colors font-medium text-left"
                   data-testid={`mobile-nav-${item.id}`}
                 >
                   {item.name}
