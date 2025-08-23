@@ -45,9 +45,7 @@ export default function HeroSection() {
               />
             </div>
             <h1 className="text-6xl md:text-8xl font-black uppercase leading-tight">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-yellow-500 to-blue-800">
-                ADINSPIRE
-              </span>
+              <span className="text-blue-600">AD</span><span className="text-yellow-600">INSPIRE</span>
             </h1>
           </div>
 

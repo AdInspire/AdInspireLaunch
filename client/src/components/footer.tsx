@@ -52,8 +52,8 @@ export default function Footer() {
                 alt="ADINSPIRE Logo" 
                 className="w-12 h-12"
               />
-              <span className="text-3xl font-bold text-white">
-                <span className="text-blue-400">AD</span>INSPIRE
+              <span className="text-3xl font-bold">
+                <span className="text-blue-400">AD</span><span className="text-yellow-500">INSPIRE</span>
               </span>
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed">

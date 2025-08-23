@@ -52,8 +52,8 @@ export default function Navbar() {
               alt="ADINSPIRE Logo" 
               className="w-10 h-10"
             />
-            <span className="text-2xl font-bold text-gray-800">
-              <span className="text-blue-600">AD</span>INSPIRE
+            <span className="text-2xl font-bold">
+              <span className="text-blue-600">AD</span><span className="text-yellow-600">INSPIRE</span>
             </span>
           </div>
 
