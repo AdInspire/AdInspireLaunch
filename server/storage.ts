@@ -1,38 +1,26 @@
 import { type Contact, type InsertContact } from "@shared/schema";
-import { randomUUID } from "crypto";
+import { ContactModel } from "./models/Contact";
 
 export interface IStorage {
-  getContact(id: string): Promise<Contact | undefined>;
+  getContact(id: string): Promise<Contact | null>;
   createContact(contact: InsertContact): Promise<Contact>;
   getAllContacts(): Promise<Contact[]>;
 }
 
-export class MemStorage implements IStorage {
-  private contacts: Map<string, Contact>;
-
-  constructor() {
-    this.contacts = new Map();
-  }
-
-  async getContact(id: string): Promise<Contact | undefined> {
-    return this.contacts.get(id);
+export class MongoStorage implements IStorage {
+  async getContact(id: string): Promise<Contact | null> {
+    return await ContactModel.findById(id).lean();
   }
 
   async createContact(insertContact: InsertContact): Promise<Contact> {
-    const id = randomUUID();
-    const contact: Contact = { 
-      ...insertContact, 
-      id, 
-      company: insertContact.company || null,
-      createdAt: new Date() 
-    };
-    this.contacts.set(id, contact);
-    return contact;
+    const newContact = new ContactModel(insertContact);
+    await newContact.save();
+    return newContact.toObject();
   }
 
   async getAllContacts(): Promise<Contact[]> {
-    return Array.from(this.contacts.values());
+    return await ContactModel.find({}).lean();
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new MongoStorage();

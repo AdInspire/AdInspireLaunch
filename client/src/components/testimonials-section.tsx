@@ -1,68 +1,54 @@
 import { motion } from "framer-motion";
-import { Star } from "lucide-react";
+import { Users, BarChart3, ShieldCheck, Handshake, Target } from "lucide-react";
 
 export default function TestimonialsSection() {
-  const testimonials = [
+  // --- REPLACED FAKE TESTIMONIALS WITH HONEST COMMITMENTS ---
+  const commitments = [
     {
-      name: "John Davis",
-      title: "CEO, TechCorp Solutions",
-      initials: "JD",
+      icon: <Handshake className="w-10 h-10" />,
       gradient: "from-blue-400 to-purple-500",
-      testimonial: "ADINSPIRE transformed our digital presence completely. Their strategic approach to lead generation increased our qualified leads by 300% in just 3 months. Outstanding results!",
-      project: "Lead Generation Campaign",
-      duration: "6 months",
-      roi: "450%",
+      title: "A True Partnership",
+      description: "We don't just work for you; we work with you. Our goal is to become a seamless extension of your team, deeply invested in your mission and dedicated to achieving your goals together.",
+      principles: ["Dedicated Support", "Regular Strategy Calls", "Shared Goals & KPIs"],
       color: "text-blue-400"
     },
     {
-      name: "Sarah Martinez",
-      title: "Founder, EcoInnovate",
-      initials: "SM",
+      icon: <BarChart3 className="w-10 h-10" />,
       gradient: "from-purple-400 to-pink-500",
-      testimonial: "Their multi-channel retention strategy helped us maintain 95% customer retention rate. The WhatsApp and email automation campaigns are phenomenal!",
-      project: "Customer Retention System",
-      duration: "4 months",
-      roi: "95%",
+      title: "Data-Driven Decisions",
+      description: "Guesswork has no place in our strategies. Every campaign is built on a foundation of rigorous data analysis, ensuring your marketing budget is invested for maximum impact and measurable ROI.",
+      principles: ["Actionable Reporting", "A/B Testing", "Continuous Optimization"],
       color: "text-purple-400"
     },
     {
-      name: "Michael Roberts",
-      title: "Marketing Director, Fashion Metro",
-      initials: "MR",
+      icon: <ShieldCheck className="w-10 h-10" />,
       gradient: "from-orange-400 to-red-500",
-      testimonial: "Working with ADINSPIRE was a game-changer. Their creative campaigns and data-driven approach helped us achieve a 250% increase in online sales. Highly recommended!",
-      project: "Digital Marketing Overhaul",
-      duration: "8 months",
-      roi: "250%",
+      title: "Radical Transparency",
+      description: "You will always know exactly what we're doing, why we're doing it, and how it's performing. We provide clear reporting and maintain open lines of communication, so you have complete confidence.",
+      principles: ["No Hidden Fees", "Open-Door Policy", "Honest Feedback"],
       color: "text-orange-400"
     },
     {
-      name: "Amanda Lee",
-      title: "Co-founder, HealthHub Pro",
-      initials: "AL",
+      icon: <Target className="w-10 h-10" />,
       gradient: "from-green-400 to-blue-500",
-      testimonial: "The Instagram and WhatsApp engagement strategies they developed for us resulted in a 400% increase in customer engagement. Their team is incredibly creative and professional.",
-      project: "Social Media Strategy",
-      duration: "5 months",
-      roi: "+400%",
+      title: "Custom-Tailored Strategies",
+      description: "We believe in bespoke solutions, not one-size-fits-all templates. We take the time to understand your unique brand, audience, and objectives to build a strategy that is uniquely yours.",
+      principles: ["In-depth Onboarding", "Audience Research", "Competitive Analysis"],
       color: "text-green-400"
     },
     {
-      name: "David Kim",
-      title: "Owner, AutoFlex Motors",
-      initials: "DK",
+      icon: <Users className="w-10 h-10" />,
       gradient: "from-yellow-400 to-orange-500",
-      testimonial: "ADINSPIRE's comprehensive digital marketing strategy helped us dominate our local market. From lead generation to customer retention, they delivered exceptional results across all channels.",
-      project: "Complete Digital Transformation",
-      duration: "12 months",
-      roi: "+60%",
+      title: "Customer-Centric Focus",
+      description: "Your success is the ultimate measure of our own. Our entire process is built around delivering value to your business and ensuring that our work directly contributes to your bottom line.",
+      principles: ["Proactive Communication", "Long-Term Vision", "Focus on Your ROI"],
       color: "text-yellow-400"
     }
   ];
 
   return (
     <section 
-      id="testimonials" 
+      id="Our Commitment" 
       className="py-20" style={{backgroundColor: '#4A5568'}}
       data-testid="testimonials-section"
     >
@@ -74,99 +60,65 @@ export default function TestimonialsSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
+          {/* --- UPDATED THEME --- */}
           <h2 className="text-5xl md:text-6xl font-black uppercase mb-6 text-gray-100">
-            CLIENT TESTIMONIALS
+            Our Client Commitment
           </h2>
           <p className="text-xl text-gray-300">
-            What our satisfied clients say about working with ADINSPIRE
+            This is our pledge to every client we partner with.
           </p>
           <div className="w-24 h-2 bg-gradient-to-r from-yellow-500 to-blue-600 mx-auto rounded-full mt-6"></div>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-8 mb-8">
-          {testimonials.slice(0, 3).map((testimonial, index) => (
+          {commitments.slice(0, 3).map((commitment, index) => (
             <motion.div
               key={index}
-              className="bg-gray-700/90 backdrop-blur-sm p-8 rounded-2xl border border-gray-600 cursor-pointer group transition-all duration-400 hover:transform hover:-translate-y-2 hover:scale-105 hover:shadow-2xl hover:border-yellow-500/50"
+              className="bg-gray-700/90 backdrop-blur-sm p-8 rounded-2xl border border-gray-600 cursor-pointer group flex flex-col justify-between"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -10, scale: 1.03 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              data-testid={`testimonial-${index}`}
+              transition={{
+                ease: "easeOut", duration: 0.5, delay: index * 0.15,
+                y: { type: "spring", stiffness: 400, damping: 15 },
+                scale: { type: "spring", stiffness: 400, damping: 15 }
+              }}
             >
-              <div className="flex items-center mb-6">
-                <div className={`w-16 h-16 bg-gradient-to-r ${testimonial.gradient} rounded-full flex items-center justify-center mr-4`}>
-                  <span className="text-white font-bold text-lg">{testimonial.initials}</span>
+              <div>
+                <div className="flex items-center mb-6">
+                  {/* --- REPLACED INITIALS WITH ICON --- */}
+                  <div className={`w-16 h-16 bg-gradient-to-r ${commitment.gradient} rounded-full flex items-center justify-center mr-4 text-white`}>
+                    {commitment.icon}
+                  </div>
+                  <div>
+                    {/* --- REPLACED NAME/TITLE WITH COMMITMENT TITLE --- */}
+                    <h4 className="text-gray-100 font-bold text-xl">{commitment.title}</h4>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-gray-100 font-bold text-lg">{testimonial.name}</h4>
-                  <p className="text-gray-400">{testimonial.title}</p>
+                <div className="mb-6">
+                  {/* --- REMOVED STAR RATING --- */}
+                  <p className="text-gray-300 italic">"{commitment.description}"</p>
                 </div>
               </div>
-
-              <div className="mb-6">
-                <div className="flex text-yellow-400 mb-3">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <Star key={star} className="w-4 h-4 fill-current" />
+              
+              {/* --- REPURPOSED HOVER EFFECT WITH KEY PRINCIPLES --- */}
+              <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-auto">
+                <h5 className={`${commitment.color} font-semibold mb-2 text-lg`}>
+                  How We Deliver:
+                </h5>
+                <ul className="space-y-1 text-gray-400 text-sm list-disc list-inside">
+                  {commitment.principles.map((principle, pIndex) => (
+                    <li key={pIndex}>{principle}</li>
                   ))}
-                </div>
-                <p className="text-gray-300 italic">"{testimonial.testimonial}"</p>
-              </div>
-
-              <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <p className={`${testimonial.color} font-semibold`}>
-                  Project: {testimonial.project}
-                </p>
-                <p className="text-gray-400 text-sm">
-                  Duration: {testimonial.duration} | ROI: {testimonial.roi}
-                </p>
+                </ul>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Additional testimonials row */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {testimonials.slice(3).map((testimonial, index) => (
-            <motion.div
-              key={index + 3}
-              className="bg-gray-700/90 backdrop-blur-sm p-8 rounded-2xl border border-gray-600 cursor-pointer group transition-all duration-400 hover:transform hover:-translate-y-2 hover:scale-105 hover:shadow-2xl hover:border-yellow-500/50"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: (index + 3) * 0.2 }}
-              data-testid={`testimonial-${index + 3}`}
-            >
-              <div className="flex items-center mb-6">
-                <div className={`w-16 h-16 bg-gradient-to-r ${testimonial.gradient} rounded-full flex items-center justify-center mr-4`}>
-                  <span className="text-white font-bold text-lg">{testimonial.initials}</span>
-                </div>
-                <div>
-                  <h4 className="text-gray-100 font-bold text-lg">{testimonial.name}</h4>
-                  <p className="text-gray-400">{testimonial.title}</p>
-                </div>
-              </div>
-
-              <div className="mb-6">
-                <div className="flex text-yellow-400 mb-3">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <Star key={star} className="w-4 h-4 fill-current" />
-                  ))}
-                </div>
-                <p className="text-gray-300 italic">"{testimonial.testimonial}"</p>
-              </div>
-
-              <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <p className={`${testimonial.color} font-semibold`}>
-                  Project: {testimonial.project}
-                </p>
-                <p className="text-gray-400 text-sm">
-                  Duration: {testimonial.duration} | ROI: {testimonial.roi}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        {/* --- You can uncomment this second row when you want to add more commitments --- */}
+        {/* <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto"> ... </div> */}
       </div>
     </section>
   );

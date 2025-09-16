@@ -1,23 +1,37 @@
-import { sql } from "drizzle-orm";
-import { pgTable, text, varchar, timestamp } from "drizzle-orm/pg-core";
-import { createInsertSchema } from "drizzle-zod";
-import { z } from "zod";
+import { z } from 'zod';
+import mongoose, { Schema, Document } from 'mongoose';
 
-export const contacts = pgTable("contacts", {
-  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
-  fullName: text("full_name").notNull(),
-  email: text("email").notNull(),
-  company: text("company"),
-  projectDetails: text("project_details").notNull(),
-  createdAt: timestamp("created_at").defaultNow(),
+// Schema for data coming IN from the contact form
+export const insertContactSchema = z.object({
+  fullName: z.string().min(1, { message: "Full name is required." }),
+  email: z.string().email({ message: "Invalid email address." }),
+  projectDetails: z.string().min(1, { message: "Project details are required." }),
+  company: z.string().optional(),
 });
 
-export const insertContactSchema = createInsertSchema(contacts).pick({
-  fullName: true,
-  email: true,
-  company: true,
-  projectDetails: true,
+// Schema for the full contact document as it exists IN THE DATABASE
+// This creates a single source of truth for our main 'Contact' type.
+const fullContactSchema = insertContactSchema.extend({
+  _id: z.string(), 
+  createdAt: z.date(),
+  updatedAt: z.date(),
 });
 
+// TypeScript type for the data you insert
 export type InsertContact = z.infer<typeof insertContactSchema>;
-export type Contact = typeof contacts.$inferSelect;
+
+// TypeScript type for the full document you get back from the database
+export type Contact = z.infer<typeof fullContactSchema>;
+
+// Mongoose schema
+const mongooseContactSchema = new Schema<Contact & Document>({
+  fullName: { type: String, required: true },
+  email: { type: String, required: true },
+  projectDetails: { type: String, required: true },
+  company: { type: String },
+}, {
+  timestamps: true 
+});
+
+// Mongoose model (checks if model exists before creating)
+export const ContactModel = mongoose.models.Contact || mongoose.model<Contact & Document>('Contact', mongooseContactSchema);

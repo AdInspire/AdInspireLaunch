@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, Phone, Send, Linkedin, Twitter, Instagram, Facebook } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -11,7 +11,7 @@ import { apiRequest } from "@/lib/queryClient";
 interface ContactFormData {
   fullName: string;
   email: string;
-  company: string;
+  company?: string;
   projectDetails: string;
 }
 
@@ -64,22 +64,40 @@ export default function ContactSection() {
 
   const contactInfo = [
     {
-      icon: <Mail className="w-6 h-6" />,
+      icon: <Mail className="w-6 h-6 text-white" />,
       color: "bg-blue-500",
-      title: "contact@adinspire.com",
+      title: "support@adinspire.com",
       subtitle: "Drop us an email anytime",
     },
     {
-      icon: <Phone className="w-6 h-6" />,
+      icon: <Phone className="w-6 h-6 text-white" />,
       color: "bg-purple-500",
-      title: "+1 (555) 123-4567",
-      subtitle: "Call us during business hours",
+      title: "+91 9211377028",
+      subtitle: "Call us anytime, We are here to help",
     },
-    {
-      icon: <MapPin className="w-6 h-6" />,
-      color: "bg-orange-500",
-      title: "123 Marketing Street, Digital City",
-      subtitle: "Visit our creative hub",
+  ];
+
+  // --- ADDED SOCIAL MEDIA HANDLES ---
+  const socialHandles = [
+    { 
+      name: "LinkedIn",
+      icon: <Linkedin className="w-6 h-6" />, 
+      url: "https://linkedin.com/your-profile" 
+    },
+    { 
+      name: "Twitter",
+      icon: <Twitter className="w-6 h-6" />, 
+      url: "https://twitter.com/your-profile" 
+    },
+    { 
+      name: "Instagram",
+      icon: <Instagram className="w-6 h-6" />, 
+      url: "https://www.instagram.com/adinspire.in" 
+    },
+    { 
+      name: "Facebook",
+      icon: <Facebook className="w-6 h-6" />, 
+      url: "https://facebook.com/your-profile" 
     },
   ];
 
@@ -122,19 +140,43 @@ export default function ContactSection() {
               to make it happen.
             </p>
 
-            <div className="space-y-4">
+            <div className="space-y-6">
               {contactInfo.map((info, index) => (
                 <div key={index} className="flex items-center space-x-4" data-testid={`contact-info-${index}`}>
                   <div className={`w-12 h-12 ${info.color} rounded-full flex items-center justify-center`}>
                     {info.icon}
                   </div>
                   <div>
-                    <div className="font-semibold text-gray-100">{info.title}</div>
+                    <div className="font-semibold text-lg text-gray-100">{info.title}</div>
                     <div className="text-gray-400">{info.subtitle}</div>
                   </div>
                 </div>
               ))}
             </div>
+
+            {/* --- NEW SOCIAL MEDIA SECTION --- */}
+            <div className="pt-6">
+                <h4 className="text-xl font-bold text-gray-100 mb-4">
+                    Connect With Us
+                </h4>
+                <div className="flex items-center space-x-4">
+                    {socialHandles.map((social) => (
+                        <motion.a
+                            key={social.name}
+                            href={social.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center text-gray-300 border border-gray-600"
+                            whileHover={{ y: -5, scale: 1.1, color: '#FBBF24' }} // Yellow color on hover
+                            transition={{ type: "spring", stiffness: 300 }}
+                            aria-label={`Visit our ${social.name} page`}
+                        >
+                            {social.icon}
+                        </motion.a>
+                    ))}
+                </div>
+            </div>
+            
           </motion.div>
 
           <motion.div

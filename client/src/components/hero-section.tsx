@@ -45,7 +45,7 @@ export default function HeroSection() {
               />
             </div>
             <h1 className="text-6xl md:text-8xl font-black uppercase leading-tight">
-              <span className="text-blue-900">AD</span><span className="text-yellow-500">INSPIRE</span>
+              <span className="text-[#0b1342]">AD</span><span className="text-[#df992a]">INSPIRE</span>
             </h1>
           </div>
 

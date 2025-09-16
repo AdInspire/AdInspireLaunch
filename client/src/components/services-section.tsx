@@ -66,14 +66,27 @@ export default function ServicesSection() {
           {services.map((service, index) => (
             <motion.div
               key={index}
-              className={`bg-gray-700/80 backdrop-blur-sm p-8 rounded-2xl border border-gray-600 hover:border-yellow-500/50 hover:shadow-xl transition-all duration-300 group`}
+              className={`bg-gray-700/80 backdrop-blur-sm p-8 rounded-2xl border border-gray-600 ${service.hoverColor} hover:shadow-2xl transition-shadow duration-300 group cursor-pointer`}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
+              // --- ENHANCED HOVER EFFECT ---
+              whileHover={{ y: -10, scale: 1.03 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+              // --- DECOUPLED TRANSITION LOGIC ---
+              transition={{
+                // For the initial "whileInView" animation
+                ease: "easeOut",
+                duration: 0.5,
+                delay: index * 0.15,
+
+                // For the "whileHover" animations (y and scale).
+                // This is a fast spring with NO DELAY.
+                y: { type: "spring", stiffness: 400, damping: 15 },
+                scale: { type: "spring", stiffness: 400, damping: 15 }
+              }}
               data-testid={`service-${index}`}
             >
-              <div className={`${service.color} text-4xl mb-6 group-hover:scale-110 transition-transform duration-300`}>
+              <div className={`${service.color} text-4xl mb-6`}>
                 {service.icon}
               </div>
               <h3 className="text-2xl font-bold text-gray-100 mb-4 uppercase">

@@ -1,4 +1,5 @@
-import { Facebook, Twitter, Linkedin, Instagram, Mail, Phone, MapPin } from "lucide-react";
+import { Link } from "wouter"; // <-- Import Link for routing
+import { Facebook, Twitter, Linkedin, Instagram, Mail, Phone} from "lucide-react";
 import logoImage from "@assets/Untitled_design__1_-removebg-preview_1755947894247.png";
 
 export default function Footer() {
@@ -9,39 +10,37 @@ export default function Footer() {
     }
   };
 
+  // --- UPDATED QUICK LINKS to match your actual sections ---
   const quickLinks = [
     { name: "Home", id: "home" },
-    { name: "About Us", id: "about" },
+    { name: "About", id: "about" },
     { name: "Services", id: "services" },
-    { name: "Our Clients", id: "clients" },
-    { name: "Testimonials", id: "testimonials" },
+    { name: "Industries", id: "industries" }, // Changed from "Our Clients"
+    { name: "Commitment", id: "commitment" }, // Changed from "Testimonials"
     { name: "Contact", id: "contact" },
   ];
 
+  // --- ADDED YOUR ACTUAL SOCIAL MEDIA URLS (replace these) ---
   const socialLinks = [
-    { icon: <Facebook className="w-5 h-5" />, color: "bg-blue-500 hover:bg-blue-600", href: "#" },
-    { icon: <Twitter className="w-5 h-5" />, color: "bg-blue-400 hover:bg-blue-500", href: "#" },
-    { icon: <Linkedin className="w-5 h-5" />, color: "bg-blue-600 hover:bg-blue-700", href: "#" },
-    { icon: <Instagram className="w-5 h-5" />, color: "bg-pink-500 hover:bg-pink-600", href: "#" },
+    { icon: <Facebook className="w-5 h-5" />, color: "bg-blue-500 hover:bg-blue-600", href: "https://facebook.com/your-page" },
+    { icon: <Twitter className="w-5 h-5" />, color: "bg-blue-400 hover:bg-blue-500", href: "https://twitter.com/your-handle" },
+    { icon: <Linkedin className="w-5 h-5" />, color: "bg-blue-600 hover:bg-blue-700", href: "https://linkedin.com/company/your-company" },
+    { icon: <Instagram className="w-5 h-5" />, color: "bg-pink-500 hover:bg-pink-600", href: "https://instagram.com/your-handle" },
   ];
 
   const contactInfo = [
     {
       icon: <Mail className="w-4 h-4 text-blue-400" />,
-      text: "contact@adinspire.com",
+      text: "support@adinspire.com",
     },
     {
       icon: <Phone className="w-4 h-4 text-blue-400" />,
-      text: "+1 (555) 123-4567",
-    },
-    {
-      icon: <MapPin className="w-4 h-4 text-blue-400" />,
-      text: "123 Marketing Street\nDigital City, DC 12345",
+      text: "+91 9211377027, +91 9211377028, +91 9211377029"
     },
   ];
 
   return (
-    <footer className="py-16 border-t border-gray-300" style={{backgroundColor: '#333333'}} data-testid="footer">
+    <footer className="py-16 border-t border-gray-300" style={{backgroundColor: '#404040ff'}} data-testid="footer">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-4 gap-8">
           {/* Company Info */}
@@ -53,7 +52,7 @@ export default function Footer() {
                 className="w-12 h-12"
               />
               <span className="text-3xl font-bold">
-                <span className="text-blue-900">AD</span><span className="text-yellow-500">INSPIRE</span>
+                <span className="text-[#0b1342]">AD</span><span className="text-[#df992a]">INSPIRE</span>
               </span>
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed">
@@ -66,6 +65,8 @@ export default function Footer() {
                 <a
                   key={index}
                   href={social.href}
+                  target="_blank" // Opens link in a new tab
+                  rel="noopener noreferrer" // Security best practice
                   className={`w-10 h-10 ${social.color} rounded-full flex items-center justify-center transition-colors`}
                   data-testid={`social-link-${index}`}
                 >
@@ -110,8 +111,16 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-slate-700 mt-12 pt-8 text-center">
+          {/* --- UPDATED COPYRIGHT AND LEGAL LINKS --- */}
           <p className="text-gray-300" data-testid="copyright">
-            © 2024 ADINSPIRE. All rights reserved. | Privacy Policy | Terms of Service
+            © {new Date().getFullYear()} ADINSPIRE. All rights reserved. |{" "}
+            <Link href="/privacy-policy" className="hover:text-yellow-400 transition-colors">
+              Privacy Policy
+            </Link>{" "}
+            |{" "}
+            <Link href="/terms-of-service" className="hover:text-yellow-400 transition-colors">
+              Terms of Service
+            </Link>
           </p>
         </div>
       </div>

@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 :root {
+  /* overflow: hidden; */
   --background: #2D3748;
   --foreground: #F7FAFC;
   --card: #4A5568;
@@ -48,14 +49,16 @@
 }
 
 @layer base {
-  * {
-    @apply border-border;
+   .base {
+    border: var(--border);
   }
   body {
-    @apply bg-background text-foreground font-inter;
-    background-color: #2D3748;
-    color: #F7FAFC;
-  }
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter);
+  background-color: #2D3748;
+  color: #F7FAFC;
+}
   html {
     scroll-behavior: smooth;
   }
