@@ -41,7 +41,7 @@ export const getQueryFn: <T>(options: {
     const baseUrl =
       import.meta.env.MODE === "development"
         ? "http://localhost:5000"
-        : "https://adinspire.onrender.com";
+        : "https://adinspire.in";
 
     const res = await fetch(`${baseUrl}/${queryKey.join("/")}`, {
       // credentials: "include", // only if needed
