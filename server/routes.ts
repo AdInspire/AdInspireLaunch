@@ -20,7 +20,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           const transporter = nodemailer.createTransport({
             host: EMAIL_HOST,
             port: parseInt(EMAIL_PORT, 10),
-            secure: true, // true for port 465
+            secure: parseInt(EMAIL_PORT, 10) === 465, // only true for 465
             auth: {
               user: EMAIL_USER,
               pass: EMAIL_PASS,
@@ -29,7 +29,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
           const mailOptions = {
             from: `"ADINSPIRE Leads" <${EMAIL_USER}>`,
-            to: '${EMAIL_USER}, ${EMAIL_RECIPIENTS}', // Sending the email to yourself and to recipients
+            to: `${EMAIL_USER}, ${EMAIL_RECIPIENTS}`, // Sending the email to yourself and to recipients
             subject: `🚀 New Lead from ${contact.fullName}`,
             html: `
               <h1>New Contact Form Submission</h1>
