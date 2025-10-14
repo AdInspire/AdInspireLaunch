@@ -16,7 +16,7 @@ export async function apiRequest(
   const baseUrl =
     import.meta.env.MODE === "development"
       ? "http://localhost:5000"           // local development
-      : "https://adinspire.onrender.com"; // Render production
+      : "https://adinspire.in";           // Render production
 
   const fullUrl = `${baseUrl}${url}`;
 
