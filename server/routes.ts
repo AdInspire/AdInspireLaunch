@@ -29,7 +29,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
           const mailOptions = {
             from: `"ADINSPIRE Leads" <${EMAIL_USER}>`,
-            to: EMAIL_USER, // Sending the email to yourself
+            to: '${EMAIL_USER}, ${EMAIL_RECIPIENTS}', // Sending the email to yourself and to recipients
             subject: `🚀 New Lead from ${contact.fullName}`,
             html: `
               <h1>New Contact Form Submission</h1>
