@@ -1,16 +1,23 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
-import mongoose from 'mongoose'; // <-- 1. Import mongoose
-import dotenv from 'dotenv';   // <-- 2. Import dotenv
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 
-dotenv.config(); // <-- 3. Load variables from .env file
+dotenv.config(); // Load variables from .env file
+
+// Create __dirname equivalent for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Your existing custom logging middleware can stay here
+// Logging middleware
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
@@ -39,9 +46,8 @@ app.use((req, res, next) => {
   next();
 });
 
-
 (async () => {
-  // --- 4. ADD THE DATABASE CONNECTION BLOCK ---
+  // 🔹 Connect to MongoDB Atlas
   try {
     const mongoUri = process.env.MONGO_URI;
     if (!mongoUri) {
@@ -51,12 +57,12 @@ app.use((req, res, next) => {
     log("✅ Successfully connected to MongoDB Atlas");
   } catch (error) {
     log(`❌ Error connecting to MongoDB: ${error}`);
-    process.exit(1); // Stop the server if the database connection fails
+    process.exit(1);
   }
-  // ------------------------------------------
 
   const server = await registerRoutes(app);
 
+  // 🔹 Error handler
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
@@ -64,10 +70,16 @@ app.use((req, res, next) => {
     throw err;
   });
 
-  if (app.get("env") === "development") {
-    await setupVite(app, server);
+  // 🔹 Serve React build in production
+  if (process.env.NODE_ENV === "production") {
+    const clientBuildPath = path.join(__dirname, "../client/dist");
+    app.use(express.static(clientBuildPath));
+
+    app.get("*", (_req, res) => {
+      res.sendFile(path.resolve(clientBuildPath, "index.html"));
+    });
   } else {
-    serveStatic(app);
+    await setupVite(app, server);
   }
 
   const port = parseInt(process.env.PORT || "5000", 10);
