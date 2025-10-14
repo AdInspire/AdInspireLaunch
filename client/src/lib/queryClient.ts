@@ -12,11 +12,19 @@ export async function apiRequest(
   url: string,
   data?: unknown | undefined,
 ): Promise<Response> {
-  const res = await fetch(url, {
+  // Decide backend base URL
+  const baseUrl =
+    import.meta.env.MODE === "development"
+      ? "http://localhost:5000"           // local development
+      : "https://adinspire.onrender.com"; // Render production
+
+  const fullUrl = `${baseUrl}${url}`;
+
+  const res = await fetch(fullUrl, {
     method,
     headers: data ? { "Content-Type": "application/json" } : {},
     body: data ? JSON.stringify(data) : undefined,
-    credentials: "include",
+    // credentials: "include"  // Only needed if using cookies
   });
 
   await throwIfResNotOk(res);
@@ -24,13 +32,19 @@ export async function apiRequest(
 }
 
 type UnauthorizedBehavior = "returnNull" | "throw";
+
 export const getQueryFn: <T>(options: {
   on401: UnauthorizedBehavior;
 }) => QueryFunction<T> =
   ({ on401: unauthorizedBehavior }) =>
   async ({ queryKey }) => {
-    const res = await fetch(queryKey.join("/") as string, {
-      credentials: "include",
+    const baseUrl =
+      import.meta.env.MODE === "development"
+        ? "http://localhost:5000"
+        : "https://adinspire.onrender.com";
+
+    const res = await fetch(`${baseUrl}/${queryKey.join("/")}`, {
+      // credentials: "include", // only if needed
     });
 
     if (unauthorizedBehavior === "returnNull" && res.status === 401) {
