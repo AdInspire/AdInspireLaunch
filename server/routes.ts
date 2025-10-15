@@ -73,5 +73,33 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
   
   const httpServer = createServer(app);
+
+  //this is to check if the mail is being received by backend or not
+
+  app.get("/test-mail", async (req, res) => {
+  try {
+    const transporter = nodemailer.createTransport({
+      host: process.env.EMAIL_HOST,
+      port: parseInt(process.env.EMAIL_PORT || "465", 10),
+      secure: parseInt(process.env.EMAIL_PORT || "465", 10) === 465,
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    await transporter.sendMail({
+      from: `"Test" <${process.env.EMAIL_USER}>`,
+      to: process.env.EMAIL_RECIPIENTS,
+      subject: "Test Email from Render",
+      text: "✅ If you got this, Render SMTP works!",
+    });
+
+    res.send("✅ Test email sent successfully!");
+  } catch (err) {
+    res.status(500).send(`❌ Email test failed: ${err}`);
+  }
+});
+
   return httpServer;
 }
