@@ -12,15 +12,16 @@ export async function apiRequest(
   url: string,
   data?: unknown
 ): Promise<Response> {
-  // Force production backend
-  const baseUrl = "https://adinspire.onrender.com";
+  const baseUrl = import.meta.env.MODE === "development"
+    ? "http://localhost:5000"
+    : "https://adinspire.onrender.com";
 
   const fullUrl = `${baseUrl}${url.startsWith("/") ? url : `/${url}`}`;
 
   const res = await fetch(fullUrl, {
     method,
     headers: data ? { "Content-Type": "application/json" } : {},
-    body: data ? JSON.stringify(data) : undefined,
+    body: data ? JSON.stringify(data) : undefined
   });
 
   await throwIfResNotOk(res);
@@ -29,22 +30,19 @@ export async function apiRequest(
 
 type UnauthorizedBehavior = "returnNull" | "throw";
 
-export const getQueryFn: <T>(options: {
-  on401: UnauthorizedBehavior;
-}) => QueryFunction<T> =
-  ({ on401: unauthorizedBehavior }) =>
+export const getQueryFn: <T>(options: { on401: UnauthorizedBehavior }) => QueryFunction<T> =
+  ({ on401 }) =>
   async ({ queryKey }) => {
-    const baseUrl = "https://adinspire.onrender.com";
+    const baseUrl = import.meta.env.MODE === "development"
+      ? "http://localhost:5000"
+      : "https://adinspire.onrender.com";
 
     const path = queryKey.join("/").startsWith("/")
       ? queryKey.join("/")
       : `/${queryKey.join("/")}`;
 
     const res = await fetch(`${baseUrl}${path}`);
-
-    if (unauthorizedBehavior === "returnNull" && res.status === 401) {
-      return null;
-    }
+    if (on401 === "returnNull" && res.status === 401) return null;
 
     await throwIfResNotOk(res);
     return await res.json();
@@ -57,10 +55,8 @@ export const queryClient = new QueryClient({
       refetchInterval: false,
       refetchOnWindowFocus: false,
       staleTime: Infinity,
-      retry: false,
+      retry: false
     },
-    mutations: {
-      retry: false,
-    },
-  },
+    mutations: { retry: false }
+  }
 });

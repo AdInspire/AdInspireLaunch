@@ -8,23 +8,16 @@ import { Resend } from "resend";
 
 export async function registerRoutes(app: Express): Promise<Server> {
 
-  // --- Contact Form Submission ---
   app.post("/api/contacts", async (req, res) => {
     try {
-      // Validate incoming form data
       const validatedData = insertContactSchema.parse(req.body);
-
-      // Save to database
-      await storage.createContact(validatedData);
+      const contact = await storage.createContact(validatedData);
 
       try {
-        // Initialize Resend client inside the route
         const resend = new Resend(process.env.RESEND_API_KEY!);
-
         const emailRecipients = process.env.EMAIL_RECIPIENTS?.split(",") || [];
         const fromEmail = "onboarding@resend.dev";
 
-        // Send the email via Resend
         await resend.emails.send({
           from: fromEmail,
           to: [process.env.EMAIL_USER || "naman.jain@adinspire.in", ...emailRecipients],
@@ -40,20 +33,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
           `,
         });
 
-        log("✅ Email sent successfully via Resend!");
-
-        // Return success response to frontend (to trigger toaster)
+        log("✅ Email sent via Resend!");
         return res.status(201).json({
           success: true,
           message: "Contact form submitted successfully",
-          contact: validatedData,
+          contact
         });
 
       } catch (emailError) {
-        log(`❌ Could not send email via Resend: ${emailError}`);
+        log(`❌ Email failed via Resend: ${emailError}`);
         return res.status(500).json({
           success: false,
-          message: "Failed to send email. Please try again later.",
+          message: "Failed to send email. Please try again later."
         });
       }
 
@@ -62,24 +53,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({
           success: false,
           message: "Invalid form data",
-          errors: error.errors,
+          errors: error.errors
         });
       } else {
         return res.status(500).json({
           success: false,
-          message: "Internal server error",
+          message: "Internal server error"
         });
       }
     }
   });
 
-  // --- Get All Contacts ---
   app.get("/api/contacts", async (req, res) => {
     try {
       const contacts = await storage.getAllContacts();
       return res.json(contacts);
     } catch (error) {
-      return res.status(500).json({ message: "Internal server error" });
+      return res.status(500).json({ success: false, message: "Internal server error" });
     }
   });
 

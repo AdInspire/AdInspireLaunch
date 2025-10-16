@@ -1,30 +1,38 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
-import { setupVite, serveStatic, log } from "./vite";
+import { setupVite, log } from "./vite";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import path from "path";
+import cors from "cors";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 
-dotenv.config(); // Load variables from .env file
+dotenv.config(); // Load .env
 
-// Create __dirname equivalent for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
+
+// --- Enable CORS for frontend ---
+app.use(cors({
+  origin: process.env.FRONTEND_URL || "https://adinspire.in",
+  methods: ["GET","POST","OPTIONS"],
+  allowedHeaders: ["Content-Type"]
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Logging middleware
+// --- Logging middleware ---
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
-  let capturedJsonResponse: Record<string, any> | undefined = undefined;
+  let capturedJsonResponse: Record<string, any> | undefined;
 
   const originalResJson = res.json;
-  res.json = function (bodyJson, ...args) {
+  res.json = function(bodyJson, ...args) {
     capturedJsonResponse = bodyJson;
     return originalResJson.apply(res, [bodyJson, ...args]);
   };
@@ -33,12 +41,8 @@ app.use((req, res, next) => {
     const duration = Date.now() - start;
     if (path.startsWith("/api")) {
       let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
-      if (capturedJsonResponse) {
-        logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
-      }
-      if (logLine.length > 80) {
-        logLine = logLine.slice(0, 79) + "…";
-      }
+      if (capturedJsonResponse) logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
+      if (logLine.length > 120) logLine = logLine.slice(0, 119) + "…";
       log(logLine);
     }
   });
@@ -47,14 +51,12 @@ app.use((req, res, next) => {
 });
 
 (async () => {
-  // 🔹 Connect to MongoDB Atlas
+  // --- Connect to MongoDB ---
   try {
     const mongoUri = process.env.MONGO_URI;
-    if (!mongoUri) {
-      throw new Error("MONGO_URI is not defined in the .env file. Please check your configuration.");
-    }
+    if (!mongoUri) throw new Error("MONGO_URI is not defined in .env");
     await mongoose.connect(mongoUri);
-    log("✅ Successfully connected to MongoDB Atlas");
+    log("✅ Connected to MongoDB Atlas");
   } catch (error) {
     log(`❌ Error connecting to MongoDB: ${error}`);
     process.exit(1);
@@ -62,15 +64,15 @@ app.use((req, res, next) => {
 
   const server = await registerRoutes(app);
 
-  // 🔹 Error handler
+  // --- Global error handler ---
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
     res.status(status).json({ message });
-    throw err;
+    log(`❌ Error: ${message}`);
   });
 
-  // 🔹 Serve React build in production
+  // --- Serve React build in production ---
   if (process.env.NODE_ENV === "production") {
     const clientBuildPath = path.join(__dirname, "../client/dist");
     app.use(express.static(clientBuildPath));
@@ -83,7 +85,5 @@ app.use((req, res, next) => {
   }
 
   const port = parseInt(process.env.PORT || "5000", 10);
-  server.listen(port, () => {
-    log(`🚀 serving on http://localhost:${port}`);
-  });
+  server.listen(port, () => log(`🚀 Server running on http://localhost:${port}`));
 })();
