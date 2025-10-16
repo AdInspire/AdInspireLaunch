@@ -82,12 +82,18 @@ export default function ContactSection() {
     { 
       name: "LinkedIn",
       icon: <Linkedin className="w-6 h-6" />, 
-      url: "https://linkedin.com/your-profile" 
+      onClick: (e: React.MouseEvent) => {
+        e.preventDefault();
+        alert("LinkedIn will be coming soon!");
+      },
     },
     { 
       name: "Twitter",
       icon: <Twitter className="w-6 h-6" />, 
-      url: "https://twitter.com/your-profile" 
+      onClick: (e: React.MouseEvent) => {
+        e.preventDefault();
+        alert("Twitter will be coming soon!"); 
+      },
     },
     { 
       name: "Instagram",

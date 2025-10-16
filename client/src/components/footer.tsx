@@ -23,8 +23,18 @@ export default function Footer() {
   // --- ADDED YOUR ACTUAL SOCIAL MEDIA URLS (replace these) ---
   const socialLinks = [
     { icon: <Facebook className="w-5 h-5" />, color: "bg-blue-500 hover:bg-blue-600", href: "https://www.facebook.com/profile.php?id=61579142551688" },
-    { icon: <Twitter className="w-5 h-5" />, color: "bg-blue-400 hover:bg-blue-500", href: "https://twitter.com/your-handle" },
-    { icon: <Linkedin className="w-5 h-5" />, color: "bg-blue-600 hover:bg-blue-700", href: "https://linkedin.com/company/your-company" },
+    { icon: <Twitter className="w-5 h-5" />,
+    color: "bg-blue-400 hover:bg-blue-500",
+    onClick: (e: React.MouseEvent) => {
+      e.preventDefault();
+      alert("Twitter will be coming soon!");
+    }, },
+    { icon: <Linkedin className="w-5 h-5" />,
+    color: "bg-blue-600 hover:bg-blue-700",
+    onClick: (e: React.MouseEvent) => {
+      e.preventDefault();
+      alert("LinkedIn will be coming soon!");
+    },},
     { icon: <Instagram className="w-5 h-5" />, color: "bg-pink-500 hover:bg-pink-600", href: "https://www.instagram.com/adinspire.in" },
   ];
 
