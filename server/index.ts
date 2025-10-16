@@ -73,17 +73,24 @@ app.use((req, res, next) => {
   });
 
   // --- Serve React build in production ---
-  if (process.env.NODE_ENV === "production") {
-    const clientBuildPath = path.join(__dirname, "../client/dist");
-    app.use(express.static(clientBuildPath));
+ if (process.env.NODE_ENV === "production") {
+  // Resolve client/dist relative to project root (cwd)
+  const clientBuildPath = path.resolve(process.cwd(), "client", "dist");
 
-    app.get("*", (_req, res) => {
-      res.sendFile(path.resolve(clientBuildPath, "index.html"));
+  // Serve static files from client/dist
+  app.use(express.static(clientBuildPath));
+
+  // Catch-all route to serve index.html for React Router
+  app.get("*", (_req, res) => {
+    res.sendFile(path.join(clientBuildPath, "index.html"), (err) => {
+      if (err) {
+        console.error("Error sending index.html:", err);
+        res.status(500).send("Internal Server Error");
+      }
     });
-  } else {
-    await setupVite(app, server);
-  }
+  });
 
-  const port = parseInt(process.env.PORT || "5000", 10);
-  server.listen(port, () => log(`🚀 Server running on http://localhost:${port}`));
+  console.log(`✅ Serving React app from ${clientBuildPath}`);
+}
+
 })();
