@@ -6,7 +6,7 @@ import { z } from "zod";
 import { log } from "./vite";
 import { Resend } from "resend";
 
-// Initialize Resend client with API key from env
+// Initialize Resend client using API key from environment
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -22,12 +22,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       try {
         const emailRecipients = process.env.EMAIL_RECIPIENTS?.split(",") || [];
-        const fromEmail = process.env.EMAIL_USER || "leads@adinspire.in";
+        const fromEmail = "onboarding@resend.dev"; // Keep your chosen sender
 
-        // Send email via Resend
+        // Send email via Resend with full form data
         await resend.emails.send({
           from: fromEmail,
-          to: [fromEmail, ...emailRecipients],
+          to: [process.env.EMAIL_USER || "naman.jain@adinspire.in", ...emailRecipients],
           subject: `🚀 New Lead from ${validatedData.fullName}`,
           html: `
             <h1>New Contact Form Submission</h1>
@@ -41,18 +41,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
 
         log("✅ Email sent successfully via Resend!");
-        return res.status(201).json({ message: "Contact form submitted successfully", contact });
+        // ✅ Respond success to front-end for toaster
+        return res.status(201).json({ success: true, message: "Contact form submitted successfully", contact });
 
       } catch (emailError) {
         log(`❌ Could not send email via Resend: ${emailError}`);
-        return res.status(500).json({ message: "Failed to send email. Please try again later." });
+        // ❌ Respond failure to front-end for toaster
+        return res.status(500).json({ success: false, message: "Failed to send email. Please try again later." });
       }
 
     } catch (error) {
       if (error instanceof z.ZodError) {
-        return res.status(400).json({ message: "Invalid form data", errors: error.errors });
+        return res.status(400).json({ success: false, message: "Invalid form data", errors: error.errors });
       } else {
-        return res.status(500).json({ message: "Internal server error" });
+        return res.status(500).json({ success: false, message: "Internal server error" });
       }
     }
   });
@@ -73,12 +75,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/test-mail", async (req, res) => {
     try {
       const emailRecipients = process.env.EMAIL_RECIPIENTS?.split(",") || [];
-      const fromEmail = process.env.EMAIL_USER || "leads@adinspire.in";
+      const fromEmail = "onboarding@resend.dev";
 
       await resend.emails.send({
         from: fromEmail,
-        to: [fromEmail, ...emailRecipients],
-        subject: "Test Email via Resend",
+        to: [process.env.EMAIL_USER || "naman.jain@adinspire.in", ...emailRecipients],
+        subject: "Test Email from Render via Resend",
         text: "✅ If you got this, the email system works!",
       });
 
