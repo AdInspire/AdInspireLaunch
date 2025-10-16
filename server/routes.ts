@@ -6,7 +6,7 @@ import { z } from "zod";
 import { log } from "./vite";
 import { Resend } from "resend";
 
-// Initialize Resend client using API key from environment
+// Initialize Resend client with API key from env
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -14,34 +14,39 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // --- Contact Form Submission ---
   app.post("/api/contacts", async (req, res) => {
     try {
+      // Validate form data
       const validatedData = insertContactSchema.parse(req.body);
+
+      // Save to database
       const contact = await storage.createContact(validatedData);
 
       try {
         const emailRecipients = process.env.EMAIL_RECIPIENTS?.split(",") || [];
-        const fromEmail = "onboarding@resend.dev"; // ✅ Use Resend test sender
+        const fromEmail = process.env.EMAIL_USER || "leads@adinspire.in";
 
+        // Send email via Resend
         await resend.emails.send({
           from: fromEmail,
-          to: [process.env.EMAIL_USER || "naman.jain@adinspire.in", ...emailRecipients],
-          subject: `🚀 New Lead from ${contact.fullName}`,
+          to: [fromEmail, ...emailRecipients],
+          subject: `🚀 New Lead from ${validatedData.fullName}`,
           html: `
             <h1>New Contact Form Submission</h1>
-            <p><strong>Name:</strong> ${contact.fullName}</p>
-            <p><strong>Email:</strong> ${contact.email}</p>
-            <p><strong>Company:</strong> ${contact.company || 'N/A'}</p>
+            <p><strong>Name:</strong> ${validatedData.fullName}</p>
+            <p><strong>Email:</strong> ${validatedData.email}</p>
+            <p><strong>Company:</strong> ${validatedData.company || 'N/A'}</p>
             <hr>
             <p><strong>Project Details:</strong></p>
-            <p>${contact.projectDetails}</p>
+            <p>${validatedData.projectDetails}</p>
           `,
         });
 
         log("✅ Email sent successfully via Resend!");
+        return res.status(201).json({ message: "Contact form submitted successfully", contact });
+
       } catch (emailError) {
         log(`❌ Could not send email via Resend: ${emailError}`);
+        return res.status(500).json({ message: "Failed to send email. Please try again later." });
       }
-
-      return res.status(201).json({ message: "Contact form submitted successfully", contact });
 
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -68,12 +73,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/test-mail", async (req, res) => {
     try {
       const emailRecipients = process.env.EMAIL_RECIPIENTS?.split(",") || [];
-      const fromEmail = "onboarding@resend.dev"; // ✅ Use test sender
+      const fromEmail = process.env.EMAIL_USER || "leads@adinspire.in";
 
       await resend.emails.send({
         from: fromEmail,
-        to: [process.env.EMAIL_USER || "naman.jain@adinspire.in", ...emailRecipients],
-        subject: "Test Email from Render via Resend",
+        to: [fromEmail, ...emailRecipients],
+        subject: "Test Email via Resend",
         text: "✅ If you got this, the email system works!",
       });
 
