@@ -10,21 +10,20 @@ async function throwIfResNotOk(res: Response) {
 export async function apiRequest(
   method: string,
   url: string,
-  data?: unknown | undefined,
+  data?: unknown | undefined
 ): Promise<Response> {
-  // Decide backend base URL
   const baseUrl =
     import.meta.env.MODE === "development"
-      ? "http://localhost:5000"           // local development
-      : "https://adinspire.in";           // Render production
+      ? "http://localhost:5000"
+      : "https://adinspire.in"; // Your production backend
 
-  const fullUrl = `${baseUrl}${url}`;
+  // Ensure url starts with /
+  const fullUrl = `${baseUrl}${url.startsWith("/") ? url : `/${url}`}`;
 
   const res = await fetch(fullUrl, {
     method,
     headers: data ? { "Content-Type": "application/json" } : {},
     body: data ? JSON.stringify(data) : undefined,
-    // credentials: "include"  // Only needed if using cookies
   });
 
   await throwIfResNotOk(res);
@@ -43,9 +42,11 @@ export const getQueryFn: <T>(options: {
         ? "http://localhost:5000"
         : "https://adinspire.in";
 
-    const res = await fetch(`${baseUrl}/${queryKey.join("/")}`, {
-      // credentials: "include", // only if needed
-    });
+    const path = queryKey.join("/").startsWith("/")
+      ? queryKey.join("/")
+      : `/${queryKey.join("/")}`;
+
+    const res = await fetch(`${baseUrl}${path}`);
 
     if (unauthorizedBehavior === "returnNull" && res.status === 401) {
       return null;
