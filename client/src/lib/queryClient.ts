@@ -10,14 +10,11 @@ async function throwIfResNotOk(res: Response) {
 export async function apiRequest(
   method: string,
   url: string,
-  data?: unknown | undefined
+  data?: unknown
 ): Promise<Response> {
-  const baseUrl =
-    import.meta.env.MODE === "development"
-      ? "http://localhost:5000"
-      : "https://adinspire.onrender.com"; // Your production backend
+  // Force production backend
+  const baseUrl = "https://adinspire.onrender.com";
 
-  // Ensure url starts with /
   const fullUrl = `${baseUrl}${url.startsWith("/") ? url : `/${url}`}`;
 
   const res = await fetch(fullUrl, {
@@ -37,10 +34,7 @@ export const getQueryFn: <T>(options: {
 }) => QueryFunction<T> =
   ({ on401: unauthorizedBehavior }) =>
   async ({ queryKey }) => {
-    const baseUrl =
-      import.meta.env.MODE === "development"
-        ? "http://localhost:5000"
-        : "https://adinspire.onrender.com";
+    const baseUrl = "https://adinspire.onrender.com";
 
     const path = queryKey.join("/").startsWith("/")
       ? queryKey.join("/")
