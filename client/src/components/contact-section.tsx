@@ -82,7 +82,7 @@ export default function ContactSection() {
     { 
       name: "LinkedIn",
       icon: <Linkedin className="w-6 h-6" />, 
-      onClick: (e: React.MouseEvent) => {
+      onClick: (e: React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
         alert("LinkedIn will be coming soon!");
       },
@@ -90,7 +90,7 @@ export default function ContactSection() {
     { 
       name: "Twitter",
       icon: <Twitter className="w-6 h-6" />, 
-      onClick: (e: React.MouseEvent) => {
+      onClick: (e: React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
         alert("Twitter will be coming soon!"); 
       },
