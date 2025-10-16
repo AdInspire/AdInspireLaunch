@@ -8,14 +8,14 @@ import cors from "cors";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 
-dotenv.config(); // Load .env
+dotenv.config(); // Load environment variables
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
 
-// --- Enable CORS for frontend ---
+// --- Enable CORS ---
 app.use(cors({
   origin: process.env.FRONTEND_URL || "https://adinspire.in",
   methods: ["GET","POST","OPTIONS"],
@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: false }));
 // --- Logging middleware ---
 app.use((req, res, next) => {
   const start = Date.now();
-  const path = req.path;
+  const pathReq = req.path;
   let capturedJsonResponse: Record<string, any> | undefined;
 
   const originalResJson = res.json;
@@ -39,8 +39,8 @@ app.use((req, res, next) => {
 
   res.on("finish", () => {
     const duration = Date.now() - start;
-    if (path.startsWith("/api")) {
-      let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
+    if (pathReq.startsWith("/api")) {
+      let logLine = `${req.method} ${pathReq} ${res.statusCode} in ${duration}ms`;
       if (capturedJsonResponse) logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
       if (logLine.length > 120) logLine = logLine.slice(0, 119) + "…";
       log(logLine);
@@ -70,17 +70,26 @@ app.use((req, res, next) => {
     const message = err.message || "Internal Server Error";
     res.status(status).json({ message });
     log(`❌ Error: ${message}`);
+    // Do NOT throw here, server should stay alive
   });
 
-  // --- Serve React build in production ---
+  // --- Serve React build in production (Option B) ---
   if (process.env.NODE_ENV === "production") {
-    const clientBuildPath = path.join(__dirname, "../client/dist");
+    const clientBuildPath = path.join(__dirname, "../dist/public"); // ← matches Vite outDir
     app.use(express.static(clientBuildPath));
 
     app.get("*", (_req, res) => {
-      res.sendFile(path.resolve(clientBuildPath, "index.html"));
+      res.sendFile(path.resolve(clientBuildPath, "index.html"), (err) => {
+        if (err) {
+          log(`❌ Error sending index.html: ${err}`);
+          res.status(500).send("Internal Server Error");
+        }
+      });
     });
+
+    log(`✅ Serving React app from ${clientBuildPath}`);
   } else {
+    // Dev mode with Vite HMR
     await setupVite(app, server);
   }
 
