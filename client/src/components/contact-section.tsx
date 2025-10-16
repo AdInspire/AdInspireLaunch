@@ -97,7 +97,7 @@ export default function ContactSection() {
     { 
       name: "Facebook",
       icon: <Facebook className="w-6 h-6" />, 
-      url: "https://facebook.com/your-profile" 
+      url: "https://www.facebook.com/profile.php?id=61579142551688" 
     },
   ];
 
