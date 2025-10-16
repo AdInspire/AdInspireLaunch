@@ -15,7 +15,7 @@ export async function apiRequest(
   const baseUrl =
     import.meta.env.MODE === "development"
       ? "http://localhost:5000"
-      : "https://adinspire.in"; // Your production backend
+      : "https://adinspire.onrender.com"; // Your production backend
 
   // Ensure url starts with /
   const fullUrl = `${baseUrl}${url.startsWith("/") ? url : `/${url}`}`;
@@ -40,7 +40,7 @@ export const getQueryFn: <T>(options: {
     const baseUrl =
       import.meta.env.MODE === "development"
         ? "http://localhost:5000"
-        : "https://adinspire.in";
+        : "https://adinspire.onrender.com";
 
     const path = queryKey.join("/").startsWith("/")
       ? queryKey.join("/")
