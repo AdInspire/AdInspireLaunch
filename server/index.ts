@@ -73,17 +73,27 @@ app.use((req, res, next) => {
   });
 
   // --- Serve React build in production ---
-  if (process.env.NODE_ENV === "production") {
-    const clientBuildPath = path.join(__dirname, "../client/dist");
+ if (process.env.NODE_ENV === "production") {
+    const clientBuildPath = path.resolve(__dirname, "../client/dist"); // relative to compiled server
     app.use(express.static(clientBuildPath));
 
+    // Catch-all route for React Router
     app.get("*", (_req, res) => {
-      res.sendFile(path.resolve(clientBuildPath, "index.html"));
+      res.sendFile(path.join(clientBuildPath, "index.html"), (err) => {
+        if (err) {
+          console.error("❌ Error sending index.html:", err);
+          res.status(500).send("Internal Server Error");
+        }
+      });
     });
+
+    log(`✅ Serving React app from ${clientBuildPath}`);
   } else {
+    // --- Setup Vite dev server for development ---
     await setupVite(app, server);
   }
 
-  const port = parseInt(process.env.PORT || "5000", 10);
-  server.listen(port, () => log(`🚀 Server running on http://localhost:${port}`));
+  // --- Use Render port or fallback to 5000 locally ---
+  const port = process.env.PORT || 5000;
+  server.listen(Number(port), () => log(`🚀 Server running on port ${port}`));
 })();
