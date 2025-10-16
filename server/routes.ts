@@ -6,7 +6,7 @@ import { z } from "zod";
 import { log } from "./vite";
 import { Resend } from "resend";
 
-// Initialize Resend client with API key from env
+// Initialize Resend client using API key from environment
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -19,11 +19,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       try {
         const emailRecipients = process.env.EMAIL_RECIPIENTS?.split(",") || [];
-        const fromEmail = process.env.EMAIL_USER || "leads@adinspire.in";
+        const fromEmail = "onboarding@resend.dev"; // ✅ Use Resend test sender
 
         await resend.emails.send({
           from: fromEmail,
-          to: [fromEmail, ...emailRecipients],
+          to: [process.env.EMAIL_USER || "naman.jain@adinspire.in", ...emailRecipients],
           subject: `🚀 New Lead from ${contact.fullName}`,
           html: `
             <h1>New Contact Form Submission</h1>
@@ -37,7 +37,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
 
         log("✅ Email sent successfully via Resend!");
-
       } catch (emailError) {
         log(`❌ Could not send email via Resend: ${emailError}`);
       }
@@ -69,11 +68,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/test-mail", async (req, res) => {
     try {
       const emailRecipients = process.env.EMAIL_RECIPIENTS?.split(",") || [];
-      const fromEmail = process.env.EMAIL_USER || "leads@adinspire.in";
+      const fromEmail = "onboarding@resend.dev"; // ✅ Use test sender
 
       await resend.emails.send({
         from: fromEmail,
-        to: [fromEmail, ...emailRecipients],
+        to: [process.env.EMAIL_USER || "naman.jain@adinspire.in", ...emailRecipients],
         subject: "Test Email from Render via Resend",
         text: "✅ If you got this, the email system works!",
       });
