@@ -6,21 +6,25 @@ import { z } from "zod";
 import { log } from "./vite";
 import { Resend } from "resend";
 
-// Initialize Resend client using API key from environment
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function registerRoutes(app: Express): Promise<Server> {
 
   // --- Contact Form Submission ---
   app.post("/api/contacts", async (req, res) => {
     try {
+      // Validate incoming form data
       const validatedData = insertContactSchema.parse(req.body);
-      const contact = await storage.createContact(validatedData);
+
+      // Save to database
+      await storage.createContact(validatedData);
 
       try {
+        // Initialize Resend client inside the route
+        const resend = new Resend(process.env.RESEND_API_KEY!);
+
         const emailRecipients = process.env.EMAIL_RECIPIENTS?.split(",") || [];
         const fromEmail = "onboarding@resend.dev";
 
+        // Send the email via Resend
         await resend.emails.send({
           from: fromEmail,
           to: [process.env.EMAIL_USER || "naman.jain@adinspire.in", ...emailRecipients],
@@ -37,10 +41,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
 
         log("✅ Email sent successfully via Resend!");
+
+        // Return success response to frontend (to trigger toaster)
         return res.status(201).json({
           success: true,
           message: "Contact form submitted successfully",
-          contact: validatedData, // send the actual form data back
+          contact: validatedData,
         });
 
       } catch (emailError) {
